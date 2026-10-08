@@ -297,3 +297,9 @@ before changing code — it records the places that look simplifiable and are no
 ## License
 
 MIT
+
+---
+
+## Friendly links
+
+- [LINUX DO](https://linux.do)

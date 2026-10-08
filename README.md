@@ -257,3 +257,9 @@ Host 自己的授权判断（Host/Origin fence + 浏览器鉴权 cookie），待
 ## License
 
 MIT
+
+---
+
+## 友情链接
+
+- [LINUX DO](https://linux.do)
