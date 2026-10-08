@@ -1,5 +1,13 @@
 # dsh-power-button
 
+![platform: Windows](https://img.shields.io/badge/platform-Windows-0078D6)
+![language: JavaScript](https://img.shields.io/badge/language-JavaScript-F7DF1E)
+![helper: PowerShell](https://img.shields.io/badge/helper-PowerShell-5391FE)
+![dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen)
+![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+
+**English** ・ [中文](README.md)
+
 Two power affordances for the **DSH Desktop** GUI (DeepSeek Harness), each switchable on
 its own:
 

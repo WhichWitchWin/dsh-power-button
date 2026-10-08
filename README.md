@@ -1,5 +1,13 @@
 # dsh-power-button
 
+![platform: Windows](https://img.shields.io/badge/platform-Windows-0078D6)
+![language: JavaScript](https://img.shields.io/badge/language-JavaScript-F7DF1E)
+![helper: PowerShell](https://img.shields.io/badge/helper-PowerShell-5391FE)
+![dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen)
+![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+
+**简体中文** ・ [English](README.en.md)
+
 给 **DSH 桌面版**（DeepSeek Harness Desktop）补两个电源入口，各自可单独开关：
 
 - **悬浮按钮** —— 可拖动；贴到左右边缘会收成一条细边，鼠标移到细边上重新展开。点击弹出
@@ -17,6 +25,15 @@ DSH 桌面版本身没有界内重启入口：托盘菜单里的重启只在开�
 - **零依赖**：纯 JS，不 import 任何 Harness 客户端包。
 - **不读别的插件的 DOM 或样式**：两个落点都走官方槽位；侧栏图标的位置也不依赖其他插件
   （装了 `@linxin666/dsh-web-all` 时落在同一位置）。
+
+---
+
+## 前言
+
+本插件由 **DeepSeek Harness Desktop + DeepSeek v4.1 flash** 制作：代码和这两份 README 都是模型
+写的，人工只参与了调试与审阅。它属于 **vibe code 产物**——每个反直觉的实现都在
+`docs/DESIGN.md` 里留了取证与实测数据，但请按"别人家 AI 养大的项目"来对待：上手前先看
+「已知边界」，遇到问题欢迎提 issue。
 
 ---
 
@@ -78,6 +95,20 @@ git clone https://github.com/WhichWitchWin/dsh-power-button.git
 - **二次确认只在真有任务在跑时才问**：宿主报告有 agent 正在运行（子代理也算）时才弹确认，
   因为那正是点击会毁掉用户拿不回来的工作的场景；空闲时直接执行，不给常见路径加摩擦。
   宿主无法作答时按"有任务"处理。
+
+### 按下去像一块小果冻 🍮
+
+两个按钮都会"捏"：
+
+- **按下**：被横向挤扁、纵向拉长一点点（`scale(.9, 1.1)`，0.16s），顺手挤出几颗 7px 的小
+  水珠，顺着你按压的方向甩出去、边飞边缩小淡掉。
+- **松手**：像果冻那样弹回来——横向先过冲 +12%、再缩到 −6%、再回到 +4%，纵向同时反向镜像
+  地晃，两三下之后才稳稳停住（悬浮 0.46s，侧栏 0.52s）。
+- **从细边钻出来**：不是"啪"地出现，而是从半宽滑出来（`scale(.5,1)` 且透明），落位时轻轻
+  弹几下（0.44s）。
+
+所以它不只是"能用"：按住有肉感，松手有回弹，贴边之后探出来也软软的。
+（时长和曲线是实测调过的——改之前先看 `docs/DESIGN.md`，那里面的数字互相咬着。）
 
 ### 两个界面分开开关
 
@@ -204,7 +235,7 @@ Host 自己的授权判断（Host/Origin fence + 浏览器鉴权 cookie），待
 | `docs/DESIGN.md` | 工程笔记（中文）：每个反直觉决定的取证与实测数据 |
 | `LICENSE` | MIT |
 
-## 开发
+## 开发（仅二次开发需要看）
 
 `lib/` 是直接加载的成品，改完在界面上热重载即可看到效果（profile 以 `link:` 方式安装时，
 源码改动不需要重装）。改代码前建议先读 `docs/DESIGN.md`，它记录了那些看起来可以简化、
