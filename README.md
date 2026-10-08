@@ -1,5 +1,6 @@
 # dsh-power-button
 
+![npm version](https://img.shields.io/npm/v/dsh-power-button)
 ![platform: Windows](https://img.shields.io/badge/platform-Windows-0078D6)
 ![language: JavaScript](https://img.shields.io/badge/language-JavaScript-F7DF1E)
 ![helper: PowerShell](https://img.shields.io/badge/helper-PowerShell-5391FE)
@@ -46,7 +47,17 @@ Copy-Item "$env:DSH_HOME\profiles\desktop\package.json" `
   "$env:DSH_HOME\profiles\desktop\package.json.bak" -Force
 ```
 
-### 方式一：本地目录
+### 方式一：从 npm 安装（推荐）
+
+```powershell
+& 'D:\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' `
+  plugin --profile desktop add dsh-power-button
+```
+
+装的是注册表上的正式版本（当前 `0.1.0`）。**只有这种装法会被插件管理器的「检查更新」
+认出来**——它只对 npm registry 直装的包做版本比对，`github:` 规格和本地路径都会被跳过。
+
+### 方式二：本地目录
 
 ```powershell
 git clone https://github.com/WhichWitchWin/dsh-power-button.git
@@ -54,14 +65,16 @@ git clone https://github.com/WhichWitchWin/dsh-power-button.git
   plugin --profile desktop add 'D:\path\to\dsh-power-button'
 ```
 
-### 方式二：从 GitHub 直接装
+### 方式三：从 GitHub 直接装
 
 ```powershell
 & 'D:\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' `
-  plugin --profile desktop add 'github:WhichWitchWin/dsh-power-button'
+  plugin --profile desktop add 'github:WhichWitchWin/dsh-power-button#main'
 ```
 
-两种方式都会把依赖写进 profile 的 `package.json`，并把本包加进 `dsh.profile.bundles`
+（`#main` 是 git 引用，换成别的分支 / tag / commit 也行；整段删掉就取默认分支。）
+
+三种方式都会把依赖写进 profile 的 `package.json`，并把本包加进 `dsh.profile.bundles`
 （`dsh.bundle.patch` 一声明即激活）。**装完重启一次 DSH**（托盘退出再打开），两个界面就会
 出现。`lib/` 是可直接加载的成品，没有构建步骤，包内不含 `src/`、`node_modules/` 或中间产物。
 

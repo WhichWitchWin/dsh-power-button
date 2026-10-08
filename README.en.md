@@ -1,5 +1,6 @@
 # dsh-power-button
 
+![npm version](https://img.shields.io/npm/v/dsh-power-button)
 ![platform: Windows](https://img.shields.io/badge/platform-Windows-0078D6)
 ![language: JavaScript](https://img.shields.io/badge/language-JavaScript-F7DF1E)
 ![helper: PowerShell](https://img.shields.io/badge/helper-PowerShell-5391FE)
@@ -53,7 +54,19 @@ Copy-Item "$env:DSH_HOME\profiles\desktop\package.json" `
   "$env:DSH_HOME\profiles\desktop\package.json.bak" -Force
 ```
 
-### Option 1: a local directory
+### Option 1: from npm (recommended)
+
+```powershell
+& 'D:\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' `
+  plugin --profile desktop add dsh-power-button
+```
+
+This installs the released registry version (currently `0.1.0`). **It is the only install
+method the plugin manager's update check understands** — that check compares versions only
+for packages installed straight from the npm registry, and skips `github:` specs and local
+paths.
+
+### Option 2: a local directory
 
 ```powershell
 git clone https://github.com/WhichWitchWin/dsh-power-button.git
@@ -61,15 +74,18 @@ git clone https://github.com/WhichWitchWin/dsh-power-button.git
   plugin --profile desktop add 'D:\path\to\dsh-power-button'
 ```
 
-### Option 2: straight from GitHub
+### Option 3: straight from GitHub
 
 ```powershell
 & 'D:\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' `
-  plugin --profile desktop add 'github:WhichWitchWin/dsh-power-button'
+  plugin --profile desktop add 'github:WhichWitchWin/dsh-power-button#main'
 ```
 
-Either way the dependency is written into the profile's `package.json` and this package is
-added to `dsh.profile.bundles` automatically — its `dsh.bundle.patch` declaration is what
+(`#main` is a git committish — any branch, tag or commit works; drop the whole `#…` part to
+take the default branch.)
+
+Every method writes the dependency into the profile's `package.json` and adds this package
+to `dsh.profile.bundles` automatically — its `dsh.bundle.patch` declaration is what
 activates it. **Restart DSH once afterwards** (quit from the tray, then reopen) and both
 interfaces appear. There is no build step: `lib/` is the finished loadable artifact, and the
 package ships no `src/`, no `node_modules/` and no intermediate build output.
