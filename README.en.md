@@ -34,6 +34,16 @@ the Start menu. This plugin fills that gap.
 
 ---
 
+## Preamble
+
+This plugin was built by **DeepSeek Harness Desktop + DeepSeek v4.1 flash**: the code and
+both READMEs were written by the model, and the human only took part in debugging and
+review. It is a piece of **vibe code** — every counter-intuitive decision is backed by
+evidence and measurements in `docs/DESIGN.md`, but treat it as "a project raised by
+somebody else's AI": read the Known limits first, and open an issue when something breaks.
+
+---
+
 ## Install
 
 Installing rewrites the profile's `package.json` and `pnpm-lock.yaml`, so back it up first:
@@ -96,6 +106,23 @@ package ships no `src/`, no `node_modules/` and no intermediate build output.
   the Host reports a running agent (subagents included) — exactly the case where a click
   destroys work the user cannot get back. An idle DSH acts at once, so the common path
   carries no extra friction. When the Host cannot answer, the fail-safe answer is to ask.
+
+### It feels like a little jelly 🍮
+
+Both buttons can be squished:
+
+- **Press**: squashed sideways and stretched a little vertically (`scale(.9, 1.1)`, 0.16s),
+  which also squeezes out a few 7px droplets — they are flung along the direction you
+  pressed and shrink away as they fly.
+- **Release**: it springs back like jelly, overshooting +12% sideways, dipping to −6% and
+  then +4%, with the vertical axis mirroring it the other way, settling after a couple of
+  wobbles (0.46s floating, 0.52s sidebar).
+- **Coming out of the sliver**: it does not pop into existence — it slides out from half
+  width (`scale(.5,1)`, transparent) and bounces gently into place (0.44s).
+
+So it is not merely usable: the press has some give, the release springs, and even sliding
+back out of the edge stays soft. (The timings and curves were tuned against measurements —
+read that part of `docs/DESIGN.md` before touching them; the numbers there bite each other.)
 
 ### Switching the two interfaces separately
 
@@ -245,7 +272,7 @@ not `~/.dsh`, the log is wherever it actually points.
 | `docs/DESIGN.md` | Engineering notes (Chinese): the evidence and measurements behind each counter-intuitive decision |
 | `LICENSE` | MIT |
 
-## Development
+## Development (for contributors only)
 
 `lib/` is the finished loadable artifact. Edit it and the UI hot-reloads (when the profile
 installs the package with `link:`, source edits need no reinstall). Read `docs/DESIGN.md`
