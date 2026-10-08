@@ -1,0 +1,26 @@
+# Nothing in this package is generated: `lib/` is the shipped artifact, so there is
+# no build output to ignore. These are the things that must never be committed.
+node_modules/
+dist/
+build/
+
+# Packaging output. `release/` holds the built zip and tarball, which are NOT committed
+# as ordinary files: they are attached to the GitHub release instead, whose asset is the
+# one users download. Publishing them as a committed artifact would put a second copy of
+# the source tree in the repository, where it goes stale the first time `lib/` changes.
+# (Uploading `release/dsh-power-button-<version>.zip` as a release asset is a deliberate
+# manual step, so this rule keeps `git status` honest in the meantime.)
+*.zip
+*.tgz
+release/
+
+# Local backups of earlier source snapshots and pre-change artifacts. These stay on
+# disk for reference and are never published.
+backups/
+
+# Editor and OS noise.
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+*.swp

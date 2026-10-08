@@ -1,0 +1,62 @@
+{
+  "name": "dsh-power-button",
+  "version": "0.1.0",
+  "description": "Restart and quit controls for the DSH desktop GUI, in two independently switchable places: a draggable floating button that snaps to a screen edge and collapses into a thin strip, and a power button in the sidebar footer.",
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "plugin",
+    "restart",
+    "quit",
+    "power-menu",
+    "cordis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhichWitchWin/dsh-power-button.git"
+  },
+  "homepage": "https://github.com/WhichWitchWin/dsh-power-button#readme",
+  "bugs": {
+    "url": "https://github.com/WhichWitchWin/dsh-power-button/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "os": [
+    "win32"
+  ],
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "docs",
+    "LICENSE",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.0-rc.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

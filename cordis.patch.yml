@@ -1,0 +1,9 @@
+# Bundle patch for dsh-power-button.
+#
+# One row: the Host half that serves the restart/quit routes and performs the
+# process work. The browser half (./client) is composed automatically by
+# dsh-client-modules from this same package's `dsh.client` declaration, so it
+# needs no second row.
+- insert:
+    - id: ui-restart-button
+      name: 'dsh-power-button'
